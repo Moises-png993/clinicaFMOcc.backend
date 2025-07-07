@@ -7,10 +7,12 @@ from .models import Paciente, HistoriaClinica
 from .serializers import PacienteSerializer, HistoriaClinicaSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 class PacienteViewSet(viewsets.ModelViewSet):
     queryset = Paciente.objects.all()
     serializer_class = PacienteSerializer
+    permission_classes = [IsAuthenticated]
 
     @action(detail=True, methods=['get'])
     def historias(self, request, pk=None):
@@ -22,3 +24,4 @@ class PacienteViewSet(viewsets.ModelViewSet):
 class HistoriaClinicaViewSet(viewsets.ModelViewSet):
     queryset = HistoriaClinica.objects.all()
     serializer_class = HistoriaClinicaSerializer
+    permission_classes = [IsAuthenticated]
